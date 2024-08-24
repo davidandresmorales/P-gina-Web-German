@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Web con Menú Desplegable</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden-section {
+            display: none;
+        }
+        .sidebar-overlay {
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+        .sidebar-open .sidebar-overlay {
+            transform: translateX(0);
+        }
+        .sidebar-open .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen relative">
+
+    <!-- Encabezado -->
+    <header class="bg-blue-600 text-white p-6 flex justify-between items-center">
+        <div class="flex items-center">
+            <button id="menu-button" class="focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h1 class="ml-4 text-3xl font-bold">Sitio Web</h1>
+        </div>
+        <div class="flex items-center">
+            <img src="images/fotopresentacion-removebg-preview.png" alt="Usuario" class="h-12 w-12 rounded-full border-2 border-white">
+            <span class="ml-2 text-xl">David Morales</span>
+        </div>
+    </header>
+
+    <!-- Overlay del Sidebar -->
+    <div id="sidebar-overlay" class="sidebar-overlay bg-blue-700 text-white w-64 p-6 fixed h-full z-40">
+        <nav>
+            <ul>
+                <li class="mb-6">
+                    <button class="hover:text-blue-300 text-lg w-full text-left" onclick="toggleSubmenu('mac-submenu')">Línea de Tiempo de Mac</button>
+                    <ul id="mac-submenu" class="submenu ml-4">
+                        <li class="mb-2"><a href="#" class="hover:text-blue-300 text-md" onclick="showSection('mac-timeline')">Apple</a></li>
+                    </ul>
+                </li>
+                <li class="mb-6">
+                    <button class="hover:text-blue-300 text-lg w-full text-left" onclick="toggleSubmenu('windows-submenu')">Línea de Tiempo de Windows</button>
+                    <ul id="windows-submenu" class="submenu ml-4">
+                        <li class="mb-2"><a href="#windows" class="hover:text-blue-300 text-md" onclick="closeSidebar()">Windows</a></li>
+                        <li class="mb-2"><a href="#windows-home" class="hover:text-blue-300 text-md" onclick="closeSidebar()">Windows Home</a></li>
+                        <li class="mb-2"><a href="#windows-company" class="hover:text-blue-300 text-md" onclick="closeSidebar()">Windows Company</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay para hacer clic fuera del menú -->
+    <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-30"></div>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 p-10">
+        <h2 class="text-4xl font-bold mb-6">Bienvenido a Mi Sitio Web</h2>
+        <p class="text-xl mb-10">Esta es el área de contenido principal. Aquí puedes acceder a las líneas de tiempo de Mac y Windows.</p>
+
+        <!-- Sección de Línea de Tiempo de Mac -->
+        <section id="mac-timeline-overview" class="mb-10">
+            <h3 class="text-3xl font-bold mb-6">Línea de Tiempo de Mac</h3>
+            <div class="flex flex-col md:flex-row items-center mb-6">
+                <img src="images/mac-timeline-placeholder.png" alt="Línea de Tiempo de Mac" class="w-64 h-64 object-cover rounded-lg shadow-lg">
+                <p class="md:ml-6 text-xl text-gray-700 mt-4 md:mt-0">Explora la evolución de los sistemas operativos de Mac a través de los años, destacando los hitos más importantes en su desarrollo y las innovaciones que han marcado la industria.</p>
+            </div>
+        </section>
+
+        <!-- Sección de Línea de Tiempo de Mac con Tabla -->
+        <section id="mac-timeline" class="hidden-section">
+            <h3 class="text-3xl font-bold mb-6">Línea de Tiempo de Mac - Detallada</h3>
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="py-2">Nombre</th>
+                        <th class="py-2">Versión (SO)</th>
+                        <th class="py-2">Versión Kernel</th>
+                        <th class="py-2">Año de Lanzamiento</th>
+                        <th class="py-2">Procesador</th>
+                        <th class="py-2">Velocidad</th>
+                        <th class="py-2">Arquitectura</th>
+                        <th class="py-2">Número de Hilos</th>
+                        <th class="py-2">Tipo de RAM</th>
+                        <th class="py-2">Capacidad</th>
+                        <th class="py-2">Frecuencia</th>
+                        <th class="py-2">Novedades del Hardware</th>
+                        <th class="py-2">Novedades del Software</th>
+                        <th class="py-2">Pantallazo de escritorio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos de la tabla de la línea de tiempo de Mac extraídos del archivo Excel -->
+                    <!-- Ejemplo de fila -->
+                    <tr>
+                        <td class="py-2">RHAPSODY DEVELOPER RELEASE</td>
+                        <td class="py-2">-</td>
+                        <td class="py-2">Kernel Mach 2.5</td>
+                        <td class="py-2">Agosto de 1997</td>
+                        <td class="py-2">PowerPC e Intel</td>
+                        <td class="py-2">PowerPC G3 a 233 MHz</td>
+                        <td class="py-2">Modular</td>
+                        <td class="py-2">1 hilo por núcleo</td>
+                        <td class="py-2">SDRAM</td>
+                        <td class="py-2">64 MB</td>
+                        <td class="py-2">66 MHz</td>
+                        <td class="py-2">Soporte inicial para arquitecturas PowerPC e Intel.</td>
+                        <td class="py-2">Implementación temprana de la interfaz gráfica.</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                     <tr>
+                        <td class="py-2">Hera (Interno)</td>
+                        <td class="py-2">MAC OS X SERVER 1.0</td>
+                        <td class="py-2">Kernel híbrido XNU (Mach 2.5 + BSD)</td>
+                        <td class="py-2">Marzo de 1999</td>
+                        <td class="py-2">PowerPC</td>
+                        <td class="py-2">PowerPC G3 a 233 MHz</td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.</td>
+                        <td class="py-2">1 hilo por núcleo</td>
+                        <td class="py-2">SDRAM</td>
+                        <td class="py-2">64 MB</td>
+                        <td class="py-2">66 MHz</td>
+                        <td class="py-2">Optimización para servidores con soporte mejorado para múltiples procesadores.
+                            Integración de tecnologías de red avanzadas, incluyendo servicios de Internet y gestión de bases de datos.
+                            Soporte para dispositivos de almacenamiento externo y discos duros de alta capacidad.
+                            Mejora en la gestión de energía y refrigeración en entornos de servidor.</td>
+                        <td class="py-2">Introducción de servicios de red como Apache (servidor web) y Sendmail (correo electrónico).
+                            Herramientas de administración de usuarios y grupos para entornos empresariales.
+                            Incorporación de WebObjects para desarrollo de aplicaciones web.
+                            Sistema de archivos HFS+ mejorado con mayor soporte para volúmenes grandes.</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Power Matcintosh G3</td>
+                        <td class="py-2">MAC OS X DEVELOPER PREVIEW</td>
+                        <td class="py-2">Kernel híbrido XNU</td>
+                        <td class="py-2">Marzo de 1999</td>
+                        <td class="py-2">PowerPC</td>
+                        <td class="py-2">PowerPC G3 a 233 MHz</td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.</td>
+                        <td class="py-2">1 hilo por núcleo</td>
+                        <td class="py-2">SDRAM</td>
+                        <td class="py-2">64 MB</td>
+                        <td class="py-2">66 MHz</td>
+                        <td class="py-2">Mejor soporte para tarjetas gráficas de alto rendimiento.
+                            Integración con hardware de desarrollo y estaciones de trabajo.
+                            Compatibilidad con dispositivos USB y FireWire.
+                            Soporte inicial para monitores de alta resolución.</td>
+                        <td class="py-2">Introducción de APIs Cocoa y Carbon para el desarrollo de aplicaciones.
+                            Implementación de un sistema de archivos robusto basado en HFS+.
+                            Primeras versiones de aplicaciones nativas como TextEdit y Mail.
+                            Mejoras en la estabilidad del sistema operativo y gestión de memoria.</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Kodiak (Interno)</td>
+                        <td class="py-2">MAC OS X PUBLIC BETA</td>
+                        <td class="py-2">Kernel híbrido XNU</td>
+                        <td class="py-2">Septiembre de 2000</td>
+                        <td class="py-2">PowerPC</td>
+                        <td class="py-2">PowerPC G3 a 233 MHz</td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.</td>
+                        <td class="py-2">1 hilo por núcleo</td>
+                        <td class="py-2">SDRAM</td>
+                        <td class="py-2">64 MB</td>
+                        <td class="py-2">66 MHz</td>
+                        <td class="py-2">Mayor compatibilidad con hardware de consumo, incluyendo impresoras y escáneres.
+                            Soporte mejorado para dispositivos gráficos y de sonido.
+                            Integración con más dispositivos periféricos como impresoras y escáneres.
+                            Mejoras en la gestión de energía y administración de baterías en portátiles.</td>
+                        <td class="py-2">Presentación pública de la interfaz Aqua con efectos gráficos avanzados.
+                            Integración de funcionalidades como el Dock y el Finder rediseñado.
+                            Mejora en la multitarea y gestión de ventanas con nuevas animaciones y transiciones.
+                            Introducción de nuevas aplicaciones nativas como QuickTime Player y Sherlock.</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Cheetah</td>
+                        <td class="py-2">MAC OS X 10.0</td>
+                        <td class="py-2">Kernel híbrido XNU</td>
+                        <td class="py-2">Marzo de 2001</td>
+                        <td class="py-2">PowerPC</td>
+                        <td class="py-2">PowerPC G3 a 233 MHz</td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.</td>
+                        <td class="py-2">1 hilo por núcleo</td>
+                        <td class="py-2">SDRAM</td>
+                        <td class="py-2">64 MB</td>
+                        <td class="py-2">66 MHz</td>
+                        <td class="py-2">Soporte para FireWire y USB como estándares de conectividad.
+                            Compatibilidad mejorada con dispositivos de almacenamiento externo.
+                            Mejoras en la gestión de memoria y recursos del sistema.
+                            Optimización para el uso de hardware gráfico más avanzado.</td>
+                        <td class="py-2">Lanzamiento de la interfaz gráfica Aqua para el público general.
+                            Inclusión de nuevas aplicaciones como Mail, Address Book y TextEdit.
+                            Implementación de características de multitarea y gestión de memoria avanzadas.
+                            Introducción de servicios de sistema como el Administrador de Dispositivos y Preferencias del Sistema</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Puma</td>
+                        <td class="py-2">MAC OS X 10.1
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2001
+                        </td>
+                        <td class="py-2">PowerPC
+                        </td>
+                        <td class="py-2">PowerPC G3 a 233 MHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">1 hilo por núcleo
+                        </td>
+                        <td class="py-2">SDRAM
+                        </td>
+                        <td class="py-2">128 MB
+                        </td>
+                        <td class="py-2">66 MHz
+                        </td>
+                        <td class="py-2">"Mejora en la compatibilidad con dispositivos USB y FireWire.
+                            Soporte ampliado para hardware de gráficos y audio.
+                            Mejoras en la eficiencia energética para dispositivos portátiles.
+                            Integración de nuevas tecnologías de impresión y escaneo."
+                            </td>
+                        <td class="py-2">"Aumento en la velocidad de arranque y rendimiento del sistema.
+                            Mejoras significativas en la estabilidad y eliminación de errores.
+                            Nuevas funcionalidades en aplicaciones como iTunes y DVD Player.
+                            Mejoras en la interfaz de usuario y en la experiencia de navegación por archivos."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Jaguar
+                        </td>
+                        <td class="py-2">MAC OS X 10.2
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Agosto de 2002
+                        </td>
+                        <td class="py-2">PowerPC
+                        </td>
+                        <td class="py-2">PowerPC G3 a 233 MHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">1 hilo por núcleo
+                        </td>
+                        <td class="py-2">SDRAM
+                        </td>
+                        <td class="py-2">128 MB
+                        </td>
+                        <td class="py-2">66 MHz
+                        </td>
+                        <td class="py-2">"Soporte mejorado para monitores múltiples y tarjetas gráficas.
+                            Mejoras en la administración de la energía y el soporte para el modo de suspensión.
+                            Integración con hardware de red y dispositivos inalámbricos.
+                            Compatibilidad con dispositivos de almacenamiento en red y servicios de impresión compartida."
+                            </td>
+                        <td class="py-2">"Introducción de QuickTime 6 con soporte para nuevos formatos multimedia.
+                            Mejoras en aplicaciones como Mail, Address Book y Finder.
+                            Implementación de tecnologías de accesibilidad como VoiceOver.
+                            Nuevas herramientas de sistema como Sherlock 3 y iChat para mensajería instantánea."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Panther
+                        </td>
+                        <td class="py-2">MAC OS X 10.3
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2003
+                        </td>
+                        <td class="py-2">PowerPC
+                        </td>
+                        <td class="py-2">PowerPC G3 a 233 MHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">1 hilo por núcleo
+                        </td>
+                        <td class="py-2">SDRAM
+                        </td>
+                        <td class="py-2">128 MB
+                        </td>
+                        <td class="py-2">66 MHz
+                        </td>
+                        <td class="py-2">"Soporte para discos duros externos y dispositivos de almacenamiento masivo.
+                            Optimización para el uso de procesadores de doble núcleo.
+                            Mejoras en el soporte para impresoras, escáneres y otros periféricos.
+                            Introducción de tecnologías de red avanzadas como IPv6."
+                            </td>
+                        <td class="py-2">"Introducción de Exposé para la gestión de ventanas y multitarea.
+                            Mejoras en el sistema de archivos y en la seguridad del sistema.
+                            Nuevas aplicaciones como iChat AV para videollamadas y Safari como navegador predeterminado.
+                            Actualizaciones en Finder, con soporte mejorado para SMB y mejor integración con Windows."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Tiger
+                        </td>
+                        <td class="py-2">MAC OS X 10.4
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Abril de 2005
+                        </td>
+                        <td class="py-2">PowerPC e Intel (a partir de la versión 10.4.4)
+                        </td>
+                        <td class="py-2">PowerPC G3 a 300 MHz / Intel a 1.5 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">PowerPC G3 (1 hilo por núcleo) / Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">SDRAM / DDR SDRAM
+                        </td>
+                        <td class="py-2">256 MB
+                        </td>
+                        <td class="py-2">100-133 MHz
+                        </td>
+                        <td class="py-2">"Soporte inicial para procesadores Intel, marcando el comienzo de la transición desde PowerPC.
+                            Mejoras en la gestión de gráficos y soporte para nuevas tarjetas gráficas.
+                            Integración con dispositivos de almacenamiento de alto rendimiento, incluyendo discos duros y unidades SSD.
+                            Optimización para el uso en dispositivos móviles con mejor gestión de energía."
+                            </td>
+                        <td class="py-2">"Introducción de Spotlight, una herramienta de búsqueda integral en el sistema.
+                            Nuevas funcionalidades en Dashboard, permitiendo la integración de widgets.
+                            Actualización de aplicaciones nativas como Mail, Safari y iChat.
+                            Mejoras en la seguridad, incluyendo tecnologías como Xcode y el sandboxing de aplicaciones."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Leopard
+                        </td>
+                        <td class="py-2">MAC OS X 10.5
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2007
+                        </td>
+                        <td class="py-2">PowerPC e Intel
+                        </td>
+                        <td class="py-2">PowerPC G4 a 867 MHz / Intel a 1.5 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">PowerPC G4 (1 hilo por núcleo) / Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR2 SDRAM
+                        </td>
+                        <td class="py-2">512 MB
+                        </td>
+                        <td class="py-2">333 MHz
+                        </td>
+                        <td class="py-2">"Soporte para procesadores de 64 bits, mejorando el rendimiento y la eficiencia.
+                            Mejoras en la compatibilidad con dispositivos gráficos avanzados y monitores de alta resolución.
+                            Integración con tecnología Bluetooth para una mayor gama de periféricos.
+                            Soporte ampliado para tecnologías de almacenamiento en red y Time Capsule."
+                            </td>
+                        <td class="py-2">"Introducción de Time Machine, una herramienta de respaldo y restauración.
+                            Nuevas características en Finder, incluyendo Cover Flow y la vista de Quick Look.
+                            Introducción de Spaces, permitiendo la gestión de múltiples escritorios virtuales.
+                            Actualizaciones en Mail, iChat, y una mayor integración con iCal y Address Book."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Snow Leopard
+                        </td>
+                        <td class="py-2">MAC OS X 10.6
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Agosto de 2009
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel a 1.5 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR2 SDRAM
+                        </td>
+                        <td class="py-2">1 GB
+                        </td>
+                        <td class="py-2">667 MHz
+                        </td>
+                        <td class="py-2">"Optimización específica para procesadores Intel, dejando de lado el soporte para PowerPC.
+                            Mejoras en la gestión de gráficos y la implementación de tecnologías como OpenCL.
+                            Soporte mejorado para dispositivos de entrada y periféricos.
+                            Optimización para discos SSD, mejorando la velocidad de lectura y escritura."
+                            </td>
+                        <td class="py-2">"Mejora en el rendimiento general del sistema y reducción de uso de espacio en disco.
+                            Introducción de tecnologías como Grand Central Dispatch para mejor manejo de tareas múltiples.
+                            Actualizaciones en QuickTime con la introducción de QuickTime X.
+                            Mejoras en la accesibilidad y en las aplicaciones nativas como Safari y Mail."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Lion
+                        </td>
+                        <td class="py-2">MAC OS X 10.7
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Julio de 2011
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core 2 Duo a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR2 / DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">667-1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para pantallas multitáctiles y gestos avanzados en trackpads.
+                            Integración de la tecnología Thunderbolt para transferencia de datos de alta velocidad.
+                            Mejoras en la administración de energía y optimización para baterías de larga duración.
+                            Soporte ampliado para gráficos de alta definición y pantallas Retina."
+                            </td>
+                        <td class="py-2">"Introducción de Mission Control, unificando Exposé, Spaces y Dashboard.
+                            Lanzamiento de la Mac App Store, facilitando la compra y descarga de aplicaciones.
+                            Implementación de Launchpad, una interfaz para organizar y lanzar aplicaciones.
+                            Integración de características de iOS, como gestos multitáctiles y aplicaciones a pantalla completa."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Mountain Lion
+                        </td>
+                        <td class="py-2">OS X 10.8
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Julio de 2012
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core 2 Duo a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Mejoras en la conectividad inalámbrica, incluyendo AirPlay Mirroring.
+                            Soporte para nuevos dispositivos Bluetooth y periféricos.
+                            Optimización para gráficos avanzados y juegos con la integración de Game Center.
+                            Mejoras en la gestión de batería y eficiencia energética."
+                            </td>
+                        <td class="py-2">"Integración de iCloud para sincronización de datos y documentos.
+                            Nuevas aplicaciones como Messages, Reminders y Notes.
+                            Introducción de Notification Center para alertas y notificaciones.
+                            Mejoras en la seguridad con Gatekeeper para la instalación de aplicaciones."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Mavericks
+                        </td>
+                        <td class="py-2">OS X 10.9
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2013
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core 2 Duo a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte mejorado para múltiples monitores y pantallas de alta resolución.
+                            Optimización para la nueva generación de MacBooks con pantallas Retina.
+                            Mejoras en la eficiencia energética con tecnologías como App Nap y Compressed Memory.
+                            Soporte para nuevas tarjetas gráficas y mayor capacidad de procesamiento."
+                            </td>
+                        <td class="py-2">"Introducción de nuevas aplicaciones como Maps y iBooks.
+                            Mejoras en Finder, incluyendo pestañas y etiquetas para organización de archivos.
+                            Nuevas características en Safari, como Links compartidos y mejor rendimiento.
+                            Integración de iCloud Keychain para la gestión de contraseñas y datos de pago."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Yosemite
+                        </td>
+                        <td class="py-2">OS X 10.10
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2014
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core 2 Duo a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para nuevos estándares de Wi-Fi y Bluetooth.
+                            Mejoras en la integración con dispositivos iOS a través de Continuity y Handoff.
+                            Soporte para la nueva generación de pantallas Retina.
+                            Optimización para la tecnología de almacenamiento Flash."
+                            </td>
+                        <td class="py-2">"Rediseño completo de la interfaz de usuario con un aspecto más plano y moderno.
+                            Integración de funciones de Continuity, permitiendo la continuidad de tareas entre dispositivos iOS y Mac.
+                            Nuevas funcionalidades en Spotlight, con búsquedas más rápidas y completas.
+                            Mejoras en aplicaciones nativas como Mail, Safari y Mensajes."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">El Capitan
+                        </td>
+                        <td class="py-2">OS X 10.11
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2015
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core 2 Duo a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para nuevas tecnologías gráficas como Metal, mejorando el rendimiento.
+                            Mejoras en la gestión de memoria y optimización para la multitarea.
+                            Integración con dispositivos de entrada avanzados, como el Force Touch trackpad.
+                            Soporte mejorado para discos SSD y almacenamiento flash."
+                            </td>
+                        <td class="py-2">"Introducción de Split View para gestionar dos aplicaciones a pantalla completa.
+                            Mejoras en Mission Control y la gestión de ventanas.
+                            Nuevas características de seguridad y estabilidad en todo el sistema.
+                            Actualizaciones en aplicaciones como Notes, Safari y Mail."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Sierra
+                        </td>
+                        <td class="py-2">MAC OS 10.12
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2016
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para Siri y micrófonos integrados en dispositivos.
+                            Integración con Apple Watch para desbloqueo automático.
+                            Soporte mejorado para gráficos y rendimiento en juegos.
+                            Optimización para dispositivos con discos SSD y almacenamiento flash."
+                            </td>
+                        <td class="py-2">"Introducción de Siri en Mac para comandos de voz y búsqueda.
+                            Integración de Apple Pay para compras en línea.
+                            Mejoras en iCloud con optimización de almacenamiento y sincronización de archivos.
+                            Nuevas funcionalidades en Fotos, como reconocimiento facial y álbumes inteligentes."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">High Sierra
+                        </td>
+                        <td class="py-2">MAC OS 10.13
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2017
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para el nuevo sistema de archivos APFS, optimizado para SSDs.
+                            Integración con hardware de realidad virtual y gráficos avanzados.
+                            Mejoras en la eficiencia energética y gestión de recursos.
+                            Soporte para la última generación de dispositivos Bluetooth y Wi-Fi."
+                            </td>
+                        <td class="py-2">"Introducción del nuevo sistema de archivos APFS, mejorando la velocidad y seguridad.
+                            Mejoras en Safari, incluyendo bloqueo de seguimiento de anuncios y reproducción automática.
+                            Nuevas funcionalidades en Fotos, como herramientas de edición avanzadas.
+                            Actualizaciones en aplicaciones como Mail, Notes y Safari."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Mojave
+                        </td>
+                        <td class="py-2">MAC OS 10.14
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2018
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">2 GB
+                        </td>
+                        <td class="py-2">1066 MHz
+                        </td>
+                        <td class="py-2">"Soporte para nuevas tecnologías de almacenamiento y gráficos.
+                            Optimización para dispositivos con pantallas Retina y alto rendimiento gráfico.
+                            Mejoras en la gestión de batería y eficiencia energética.
+                            Soporte para dispositivos de entrada avanzados y periféricos."
+                            </td>
+                        <td class="py-2">"Introducción del Modo Oscuro para una interfaz más cómoda en condiciones de poca luz.
+                            Nuevas funcionalidades en Finder, como Gallery View y Quick Actions.
+                            Introducción de la aplicación Home para controlar dispositivos inteligentes.
+                            Mejoras en la seguridad y privacidad con herramientas como la Grabación de Pantalla y Cámara."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Catalina
+                        </td>
+                        <td class="py-2">MAC OS 10.15
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2019
+                        </td>
+                        <td class="py-2">Intel
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading)
+                        </td>
+                        <td class="py-2">DDR3 SDRAM
+                        </td>
+                        <td class="py-2">4 GB
+                        </td>
+                        <td class="py-2">1600 MHz
+                        </td>
+                        <td class="py-2">"Soporte para nuevas tecnologías de almacenamiento y gráficos avanzados.
+                            Integración con dispositivos de entrada y periféricos de última generación.
+                            Optimización para la eficiencia energética en dispositivos portátiles.
+                            Mejoras en la gestión de memoria y recursos del sistema."
+                            </td>
+                        <td class="py-2">"Introducción de Sidecar para usar un iPad como pantalla secundaria.
+                            Separación de iTunes en aplicaciones independientes: Música, TV y Podcasts.
+                            Nuevas funcionalidades en Screen Time para monitorear y limitar el uso de aplicaciones.
+                            Mejoras en la seguridad con Gatekeeper y nuevas características de privacidad."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Big Sur
+                        </td>
+                        <td class="py-2">MAC OS 11
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Noviembre de 2020
+                        </td>
+                        <td class="py-2">Intel y Apple Silicon (M1)
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz y superiores, Apple Silicon (M1).
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading) / Apple Silicon (8 hilos en M1)
+                        </td>
+                        <td class="py-2">LPDDR4X / DDR4 SDRAM
+                        </td>
+                        <td class="py-2">4 GB
+                        </td>
+                        <td class="py-2">2133 MHz
+                        </td>
+                        <td class="py-2">"Soporte para la transición a procesadores Apple Silicon (M1).
+                            Mejoras en la gestión de gráficos y soporte para pantallas Retina.
+                            Integración con dispositivos de entrada y periféricos de última generación.
+                            Soporte para la última tecnología de conectividad y redes."
+                            </td>
+                        <td class="py-2">"Rediseño completo de la interfaz de usuario con nuevas iconografías y temas.
+                            Mejoras en el rendimiento y estabilidad general del sistema.
+                            Nuevas funcionalidades en Safari, incluyendo una página de inicio personalizable.
+                            Integración de nuevas aplicaciones y mejoras en las aplicaciones existentes."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Monterey
+                        </td>
+                        <td class="py-2">MAC OS 12
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2021
+                        </td>
+                        <td class="py-2">Intel y Apple Silicon (M1)
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz y superiores, Apple Silicon (M1).
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading) / Apple Silicon (8 hilos en M1)
+                        </td>
+                        <td class="py-2">LPDDR4X / DDR4 SDRAM
+                        </td>
+                        <td class="py-2">4 GB
+                        </td>
+                        <td class="py-2">2133 MHz
+                        </td>
+                        <td class="py-2">"Soporte ampliado para procesadores Apple Silicon y gráficos avanzados.
+                            Integración con la última tecnología de conectividad, incluyendo 5G y Wi-Fi 6.
+                            Mejoras en la gestión de batería y eficiencia energética.
+                            Soporte para la última generación de dispositivos de entrada y periféricos."
+                            </td>
+                        <td class="py-2">"Introducción de Universal Control para controlar múltiples dispositivos Apple con un solo mouse y teclado.
+                            Mejoras en FaceTime, incluyendo la introducción del Modo Retrato y Spatial Audio.
+                            Nuevas funcionalidades en Safari, incluyendo grupos de pestañas.
+                            Mejoras en la seguridad y privacidad, incluyendo Mail Privacy Protection."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Ventura
+                        </td>
+                        <td class="py-2">MAC OS 13
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Octubre de 2022
+                        </td>
+                        <td class="py-2">Intel y Apple Silicon (M1, M2)
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz y superiores, Apple Silicon (M1, M2).
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading) / Apple Silicon (8 hilos en M1, 8-10 hilos en M2)
+                        </td>
+                        <td class="py-2">LPDDR4X / DDR4 SDRAM
+                        </td>
+                        <td class="py-2">4 GB
+                        </td>
+                        <td class="py-2">2133 MHz
+                        </td>
+                        <td class="py-2">"Soporte para las últimas generaciones de hardware Apple Silicon.
+                            Mejoras en la compatibilidad con gráficos y pantallas de alta resolución.
+                            Integración con tecnologías de red avanzadas y dispositivos de almacenamiento.
+                            Optimización para dispositivos portátiles con mayor eficiencia energética."
+                            </td>
+                        <td class="py-2">"Introducción de Stage Manager para organizar ventanas y aplicaciones.
+                            Mejoras en Mail, incluyendo búsqueda mejorada y recordatorios para correos electrónicos.
+                            Nuevas funcionalidades en Messages, incluyendo la edición y eliminación de mensajes.
+                            Integración de Continuity Camera para usar el iPhone como cámara web."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Sonoma
+                        </td>
+                        <td class="py-2">MAC OS 14
+                        </td>
+                        <td class="py-2">Kernel híbrido XNU
+                        </td>
+                        <td class="py-2">Septiembre de 2023
+                        </td>
+                        <td class="py-2">Intel y Apple Silicon (M1, M2)
+                        </td>
+                        <td class="py-2">Intel Core i3 a 2.0 GHz y superiores, Apple Silicon (M1, M2).
+                        </td>
+                        <td class="py-2">Mac OS X cuenta con una arquitectura modular formada por cuatro componentes principales: el núcleo del sistema operativo denominado Darwin, un conjunto de frameworks para aplicaciones, sistemas gráficos basados en estándares, y la interfaz de usuario conocida como Aqua.
+                        </td>
+                        <td class="py-2">Intel (2 hilos por núcleo con Hyper-Threading) / Apple Silicon (8 hilos en M1, 8-10 hilos en M2)
+                        </td>
+                        <td class="py-2">LPDDR4X / DDR4 SDRAM
+                        </td>
+                        <td class="py-2">4 GB
+                        </td>
+                        <td class="py-2">2133 MHz
+                        </td>
+                        <td class="py-2">"Soporte para la última generación de procesadores y gráficos avanzados.
+                            Mejoras en la integración con dispositivos de almacenamiento externo y en red.
+                            Soporte ampliado para la última tecnología de conectividad y redes.
+                            Optimización para pantallas de alta resolución y dispositivos de entrada avanzados."
+                            </td>
+                        <td class="py-2">"Nuevas funcionalidades en FaceTime, incluyendo SharePlay y soporte para múltiples dispositivos.
+                            Mejoras en Safari, incluyendo la personalización de la página de inicio y nuevas extensiones.
+                            Introducción de nuevas aplicaciones nativas y mejoras en las existentes.
+                            Mejoras en la seguridad y privacidad con nuevas herramientas de gestión de datos."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    
+                    <!-- Continuar con los otros registros -->
+                </tbody>
+            </table>
+            <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="showSection('mac-timeline-overview')">Regresar</button>
+        </section>
+    </main>
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const overlay = document.getElementById('overlay');
+
+        menuButton.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        overlay.addEventListener('click', () => {
+            closeSidebar();
+        });
+
+        function closeSidebar() {
+            document.body.classList.remove('sidebar-open');
+        }
+
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('hidden');
+        }
+
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden-section');
+            });
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.remove('hidden-section');
+            closeSidebar();
+        }
+    </script>
+</body>
+</html>

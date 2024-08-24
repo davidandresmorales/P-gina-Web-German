@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Web con Menú Desplegable</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar-overlay {
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+        .sidebar-open .sidebar-overlay {
+            transform: translateX(0);
+        }
+
+        .sidebar-open .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .submenu-open {
+            max-height: 500px;
+            /* Suficiente para mostrar todos los elementos del submenú */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col min-h-screen relative">
+
+    <!-- Encabezado -->
+    <header class="bg-blue-600 text-white p-6 flex justify-between items-center">
+        <div class="flex items-center">
+            <button id="menu-button" class="focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h1 class="ml-4 text-3xl font-bold">Sitio Web</h1>
+        </div>
+        <div class="flex items-center">
+            <img src="images/fotopresentacion-removebg-preview.png" alt="Usuario"
+                class="h-12 w-12 rounded-full border-2 border-white">
+            <span class="ml-2 text-xl">David Morales</span>
+        </div>
+    </header>
+
+    <!-- Overlay del Sidebar -->
+    <div id="sidebar-overlay" class="sidebar-overlay bg-blue-700 text-white w-64 p-6 fixed h-full z-40">
+        <nav>
+            <ul>
+                <li class="mb-6">
+                    <button class="hover:text-blue-300 text-lg w-full text-left"
+                        onclick="toggleSubmenu('mac-submenu')">Línea de Tiempo de Mac</button>
+                    <!-- Modificación en la Sección de Línea de Tiempo de Mac -->
+                    <ul id="mac-submenu" class="submenu ml-4">
+                        <li class="mb-2">
+                            <a href="mac-timeline.html" class="hover:text-blue-300 text-md"
+                                onclick="closeSidebar()" target="_blank">Apple</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="mb-6">
+                    <button class="hover:text-blue-300 text-lg w-full text-left"
+                        onclick="toggleSubmenu('windows-submenu')">Línea de Tiempo de Windows</button>
+                    <ul id="windows-submenu" class="submenu ml-4">
+                        <li class="mb-2"><a href="windows-timeline.html" class="hover:text-blue-300 text-md" onclick="closeSidebar()" target="_blank">Windows</a></li>
+
+                        <li class="mb-2"><a href="#windows-home" class="hover:text-blue-300 text-md"
+                                onclick="closeSidebar()">Windows Home</a></li>
+                        <li class="mb-2"><a href="#windows-company" class="hover:text-blue-300 text-md"
+                                onclick="closeSidebar()">Windows Company</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay para hacer clic fuera del menú -->
+    <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-30"></div>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 p-10">
+        <h2 class="text-4xl font-bold mb-6">Bienvenido a Mi Sitio Web</h2>
+        <p class="text-xl mb-10">Esta es el área de contenido principal. Aquí puedes acceder a las líneas de tiempo de
+            Mac y Windows.</p>
+
+        <!-- Sección de Línea de Tiempo de Mac -->
+        <section id="mac-timeline" class="mb-10">
+            <h3 class="text-3xl font-bold mb-6">Línea de Tiempo de Mac</h3>
+            <div class="flex flex-col md:flex-row items-center mb-6">
+                <img src="images/mac-timeline-placeholder.png" alt="Línea de Tiempo de Mac"
+                    class="w-64 h-64 object-cover rounded-lg shadow-lg">
+                <p class="md:ml-6 text-xl text-gray-700 mt-4 md:mt-0">Mac OS X fue desarrollado a partir de NEXTSTEP,
+                    que a su vez se basó en el código del núcleo Mach de la Universidad Carnegie Mellon y de 4.4 BSD, la
+                    versión gratuita y abierta de Unix de la Universidad de Berkeley.18​ Ciertas partes de FreeBSD y
+                    NetBSD también fueron incorporadas en NEXTSTEP.19​ Mientras Jobs estaba en NeXT, fuera de Apple, la
+                    compañía intentó crear un sistema de «próxima generación» a través de los proyectos Taligent,
+                    Copland y Gershwin, con poco éxito.20​
+
+                    Finalmente el sistema de NeXT (en ese entonces denominado OPENSTEP) fue seleccionado para ser la
+                    base del próximo sistema operativo de Apple, por lo cual la compañía de Cupertino adquirió NeXT en
+                    su totalidad.21​ Steve Jobs regresó a Apple como CEO interino, y luego asumió el cargo de lleno,
+                    acompañando la transformación de OPENSTEP en un sistema privativo y de apariencia más pulida para
+                    ser adoptado para el mercado primario de Apple: usuarios de hogar y los profesionales multimedia.18​
+                    El proyecto fue conocido inicialmente como Rhapsody y luego adoptó el nombre de Mac OS X.22​ Apple
+                    sigue publicando la base de código abierto, ahora llamada Darwin, a la que luego se adiciona la
+                    interfaz gráfica privativa y se comercializa como Mac OS.23​
+
+                    Mac OS X Server 1.x era incompatible con el software diseñado para el software original y no
+                    disponía de soporte para el puerto IEEE 1394 (FireWire). Mac OS X 10.x trajo consigo mayor
+                    compatibilidad y funcionalidad al incluir la Carbon API al igual que soporte para FireWire. Con la
+                    evolución del sistema, abandonó el legado de Mac OS hacia un énfasis de estilo de vida digital en
+                    las aplicaciones, tal como ocurrió con iLife, iWork y el media center Front Row.24​ Cada versión
+                    incluía modificaciones a la interfaz general, como la apariencia metálica agregada en la versión
+                    10.3, la barra de títulos sin rayas en la versión 10.4 y la remoción en la versión 10.5 de la
+                    apariencia metálica en favor de un estilo de ventana unificado en gradiente.25​26​
+
+                    Descripción</p>
+            </div>
+        </section>
+
+        <!-- Sección de Línea de Tiempo de Windows -->
+        <section id="windows-timeline">
+            <h3 class="text-3xl font-bold mb-6">Línea de Tiempo de Windows</h3>
+            <div class="flex flex-col md:flex-row items-center">
+                <img src="images/windows-timeline-placeholder.png" alt="Línea de Tiempo de Windows"
+                    class="w-64 h-64 object-cover rounded-lg shadow-lg">
+                <p class="md:ml-6 text-xl text-gray-700 mt-4 md:mt-0">Descubre los avances de Windows desde sus primeras
+                    versiones hasta la actualidad, incluyendo las ediciones más populares y las mejoras tecnológicas que
+                    han definido cada una.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const overlay = document.getElementById('overlay');
+
+        menuButton.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        overlay.addEventListener('click', () => {
+            closeSidebar();
+        });
+
+        function closeSidebar() {
+            document.body.classList.remove('sidebar-open');
+        }
+
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('submenu-open');
+        }
+    </script>
+</body>
+
+</html>

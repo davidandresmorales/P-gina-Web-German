@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo de Windows</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 p-10">
+    <header class="bg-blue-600 text-white p-6 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Línea de Tiempo de Windows</h1>
+        <!-- Botón para regresar a la página anterior -->
+        <button onclick="window.history.back();" class="bg-white text-blue-600 px-4 py-2 rounded shadow hover:bg-blue-200">
+            Regresar
+        </button>
+    </header>
+    <main class="mt-6">
+        <h2 class="text-2xl font-bold mb-4">Tabla de Versiones de MS-DOS y PC DOS</h2>
+        <div class="overflow-x-auto bg-white p-6 rounded-lg shadow-md">
+            <!-- Aquí se incluye la tabla generada a partir del archivo Excel -->
+            <table border="1" class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th>DATOS SISTEMA OPERATIVO</th>
+                        <th>VERSION (SO)</th>
+                        <th>VERSION KERNEL</th>
+                        <th>AÑO LANZAMIENTO</th>
+                        <th>DATOS PROCESADOR</th>
+                        <th>VELOCIDAD</th>
+                        <th>ARQUITECTURA</th>
+                        <th>NUMERO DE HILOS</th>
+                        <th>DATOS MEMORIA (RAM)</th>
+                        <th>CAPACIDAD</th>
+                        <th>FRECUENCIA (VELOCIDAD)</th>
+                        <th>NOVEDADES DEL HARDWARE</th>
+                        <th>NOVEDADES DEL SOFTWARE</th>
+                        <th>PANTALLAZO ESCRITORIO</th>
+                    </tr>
+                       <!-- Agrega más filas aquí para cada entrada en la tabla -->
+                     
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PC DOS</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1981</td>
+                        <td>Intel 8088</td>
+                        <td>4,77 MHz</td>
+                        <td>16 bits</td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos.</td>
+                        <td>DRAM</td>
+                        <td>64KB</td>
+                        <td>200 ns a 150 ns</td>
+                        <td>IBM PC (modelo 5150): Procesador Intel 8088, 16 bits, 4.77 MHz, RAM de 16 a 640 KB.</td>
+                        <td>- Sistema operativo básico para IBM PC.\n- Soporte para 16 KB de RAM.\n- Sin soporte para disquetes, discos duros ni gráficos.</td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>PC DOS
+                        </td>
+                        <td>1.1
+                        </td>
+                        <td>1.1
+                        </td>
+                        <td>1982
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>64KB
+                        </td>
+                        <td>200 ns a 150 ns
+                        </td>
+                        <td>Expansión en opciones de almacenamiento: Soporte para unidades de disquete de 5.25 pulgadas de doble cara (360 KB).
+                        </td>
+                        <td>"- Introducción de soporte para discos de 5.25 pulgadas de doble cara (360 KB).
+                            - Mejoras en el sistema de archivos."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>2
+                        </td>
+                        <td>2
+                        </td>
+                        <td>1983
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>64KB
+                        </td>
+                        <td>150 ns a 120 ns
+                        </td>
+                        <td>IBM PC/XT (modelo 5160): Disco duro de 10 MB, expandiendo la capacidad de almacenamiento.
+                        </td>
+                        <td>"- Introducción de directorios para organizar archivos.
+                            - Soporte para discos duros.
+                            - Nuevos comandos como FORMAT, CHDIR, MD."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>PC DOS
+                        </td>
+                        <td>2.1
+                        </td>
+                        <td>2.1
+                        </td>
+                        <td>1983
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>64KB
+                        </td>
+                        <td>150 ns a 120 ns
+                        </td>
+                        <td>IBM PC/XT (modelo 5160): Consolidación del PC/XT como estándar con disco duro y expansión en el soporte de hardware.
+                        </td>
+                        <td>"- Soporte para discos de 10 MB en el IBM PC/XT.
+                            - Mejoras en la administración de archivos y directorios."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>2.11
+                        </td>
+                        <td>2.11
+                        </td>
+                        <td>1983
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>64KB
+                        </td>
+                        <td>120 ns a 100 ns
+                        </td>
+                        <td>Compatibilidad mejorada con el hardware del IBM PC/XT, mejorando la funcionalidad para el hardware existente.
+                        </td>
+                        <td>"- Mejoras en la compatibilidad y estabilidad.
+                            - Correcciones de errores y optimización de funciones existentes."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>3.2
+                        </td>
+                        <td>3.2
+                        </td>
+                        <td>1986
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>256KB
+                        </td>
+                        <td>120 ns a 100 ns
+                        </td>
+                        <td>"IBM PC/AT (modelo 5170): Procesador Intel 80286, hasta 16 MB de RAM.
+                            Tarjeta de video EGA (Enhanced Graphics Adapter) con mayor resolución y más colores."
+                            </td>
+                        <td>"- Soporte para el IBM PC/AT.
+                            - Introducción del soporte para particiones grandes de disco duro.
+                            - Nuevos comandos y utilidades."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>PC DOS
+                        </td>
+                        <td>3.3
+                        </td>
+                        <td>3.3
+                        </td>
+                        <td>1987
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>640KB
+                        </td>
+                        <td>100 ns a 80 ns
+                        </td>
+                        <td>"IBM PC/AT (modelo 5170): Soporte para más memoria y discos duros más grandes.
+                            Memoria expandida con mayor capacidad de direccionamiento."
+                            </td>
+                        <td>"- Soporte para discos duros más grandes y la expansión de la capacidad del sistema de archivos.
+                            - Mejoras en la administración de memoria."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>3.3
+                        </td>
+                        <td>3.3
+                        </td>
+                        <td>1987
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>640KB
+                        </td>
+                        <td>100 ns a 80 ns
+                        </td>
+                        <td>IBM PC/AT (modelo 5170): Soporte para hardware mejorado como la tarjeta EGA y discos duros más grandes.
+                        </td>
+                        <td>"- Mejoras en la compatibilidad con hardware.
+                            - Expansión en el soporte para discos duros y sistemas de archivos.
+                            - Nuevas utilidades."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>4
+                        </td>
+                        <td>4
+                        </td>
+                        <td>1988
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>1MB
+                        </td>
+                        <td>80 ns a 60 ns
+                        </td>
+                        <td>"IBM PS/2 (modelo 8550): Procesadores Intel 80286, nueva arquitectura Micro Channel Architecture (MCA).
+                            Discos duros más grandes y soporte para más memoria."
+                            </td>
+                        <td>"- Introducción de soporte para la arquitectura Micro Channel (MCA).
+                            - Nuevas características de administración de memoria.
+                            - Soporte para particiones de disco más grandes."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>PC DOS
+                        </td>
+                        <td>4
+                        </td>
+                        <td>4
+                        </td>
+                        <td>1988
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>1MB
+                        </td>
+                        <td>80 ns a 60 ns
+                        </td>
+                        <td>IBM PS/2 (modelo 8550): Soporte para arquitectura MCA y mejoras en discos duros y memoria expandida.
+                        </td>
+                        <td>"- Soporte para la arquitectura MCA.
+                            - Mejoras en la administración de discos y memoria.
+                            - Nuevas funciones de sistema de archivos."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>4.01
+                        </td>
+                        <td>4.01
+                        </td>
+                        <td>1989
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>1MB
+                        </td>
+                        <td>80 ns a 60 ns
+                        </td>
+                        <td>IBM PS/2 (modelo 8550): Correcciones y mejoras en la compatibilidad con hardware PS/2 y arquitectura MCA.
+                        </td>
+                        <td>"- Correcciones de errores y mejoras en la compatibilidad con hardware.
+                            - Optimización de funciones y corrección de errores de la versión 4.0."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>5
+                        </td>
+                        <td>5
+                        </td>
+                        <td>1991
+                        </td>
+                        <td>Intel 8088
+                        </td>
+                        <td>4,77 MHz
+                        </td>
+                        <td>16 bits
+                        </td>
+                        <td>No cuenta con múltiples núcleos o hilos como los procesadores modernos, su diseño se basa en un único núcleo con un bus de datos externo de 8 bits.
+                        </td>
+                        <td>DRAM
+                        </td>
+                        <td>2GB
+                        </td>
+                        <td>70 ns a 60 ns
+                        </td>
+                        <td>"Intel 80386 y 80486: Mejora en rendimiento, soporte para multitarea y más memoria.
+                            Soporte para memoria extendida y administradores de memoria.
+                            Discos duros más grandes y unidades de CD-ROM."
+                            </td>
+                        <td>"- Introducción de soporte para memoria extendida (XMS).
+                            - Mejora en el sistema de gestión de archivos.
+                            - Nuevas utilidades como EDIT, UNDELETE, y MEM."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>6
+                        </td>
+                        <td>6
+                        </td>
+                        <td>1993
+                        </td>
+                        <td>Intel 80386/80486
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>x86
+                        </td>
+                        <td>1
+                        </td>
+                        <td>RAM
+                        </td>
+                        <td>1 MB – 16 MB
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>"- Mejora en el soporte para discos duros grandes.
+                            - Introducción de Disk Compression (Doublespace)."
+                            </td>
+                        <td>"- El sistema operativo básico permitía ejecutar comandos de archivo como DIR, COPY, DEL, REN. Era simple pero efectivo para las tareas cotidianas."
+                        </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>6.2
+                        </td>
+                        <td>6.2
+                        </td>
+                        <td>1994
+                        </td>
+                        <td>Intel 80386/80486
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>x86
+                        </td>
+                        <td>1
+                        </td>
+                        <td>RAM
+                        </td>
+                        <td>1 MB – 16 MB
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>- Introducción de soporte mejorado para discos duros y nuevas capacidades de compresión.
+                        </td>
+                        <td>"- Actualizaciones en las herramientas de administración del sistema.
+                            - Mejoras en la funcionalidad de Doublespace."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>6.21
+                        </td>
+                        <td>6.21</td>
+                        <td>1994
+                        </td>
+                        <td>Intel 80386/80486
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>x86
+                        </td>
+                        <td>1</td>
+                        <td>RAM
+                        </td>
+                        <td>1 MB – 16 MB
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>"- Mejoras en la compatibilidad con hardware.
+                            - Correcciones y actualizaciones en las herramientas de sistema."
+                            </td>
+                        <td>"- Corrección de errores y mejoras en la funcionalidad de Doublespace y Defrag.
+                            - Mejoras en el manejo de memoria."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>PC DOS
+                        </td>
+                        <td>6.3
+                        </td>
+                        <td>6.3
+                        </td>
+                        <td>1994
+                        </td>
+                        <td>Intel 80386/80486
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>x86
+                        </td>
+                        <td>1
+                        </td>
+                        <td>RAM
+                        </td>
+                        <td>1 MB – 16 MB
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>"- Introducción de soporte para nuevas funciones de hardware IBM.
+                            - Mejoras en la compatibilidad con hardware y periféricos."
+                            </td>
+                        <td>"- Nuevas herramientas para la administración del sistema.
+                            - Mejoras en la funcionalidad de herramientas de disco."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <tr>
+                        <td>MS-DOS
+                        </td>
+                        <td>6.22
+                        </td>
+                        <td>6.22
+                        </td>
+                        <td>1994
+                        </td>
+                        <td>Intel 80386/80486
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>x86
+                        </td>
+                        <td>1</td>
+                        <td>RAM</td>
+                        <td>1 MB – 16 MB
+                        </td>
+                        <td>16 MHz – 66 MHz
+                        </td>
+                        <td>"- Soporte mejorado para discos grandes y dispositivos de almacenamiento.
+                            - Corrección de errores en Doublespace."
+                            </td>
+                        <td>"- Corrección de errores y mejoras en Doublespace y Defrag.
+                            - Mejoras en la compatibilidad y estabilidad del sistema."
+                            </td>
+                        <td class="py-2"><img src="images/Rhapsody_Developer_Release_Desktop.png" alt="RHAPSODY DEVELOPER RELEASE" class="w-32"></td>
+                    </tr>
+                    <!-- Agrega más filas aquí para cada entrada en la tabla -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

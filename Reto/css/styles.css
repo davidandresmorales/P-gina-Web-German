@@ -1,0 +1,58 @@
+/* General */
+body {
+    font-size: 18px; /* Tamaño base del texto */
+    background-color: #f7fafc; /* Fondo claro */
+    color: #333; /* Color de texto general */
+}
+
+/* Sidebar */
+.sidebar-overlay {
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
+
+.sidebar-open .sidebar-overlay {
+    transform: translateX(0);
+}
+
+#sidebar-overlay {
+    background-color: #1e3a8a; /* Fondo azul oscuro para el sidebar */
+    color: #fff; /* Color de texto blanco */
+}
+
+#sidebar-overlay ul li a:hover {
+    color: #3b82f6; /* Cambiar color a azul claro en hover */
+}
+
+/* Encabezado */
+header {
+    background-color: #2563eb; /* Fondo azul */
+    color: #fff; /* Color de texto blanco */
+}
+
+header h1 {
+    font-size: 2rem; /* Tamaño del título */
+}
+
+/* Secciones de contenido */
+section {
+    margin-top: 2.5rem; /* Espaciado superior en las secciones */
+}
+
+section h3 {
+    font-size: 1.875rem; /* Tamaño del título en secciones */
+    margin-bottom: 1.5rem; /* Espacio inferior del título */
+}
+
+section img {
+    margin-bottom: 1.5rem; /* Espacio inferior de la imagen */
+}
+
+/* Pie de página */
+footer {
+    background-color: #2563eb; /* Fondo azul */
+    color: #fff; /* Color de texto blanco */
+    padding: 1.5rem 0; /* Espaciado interno */
+    text-align: center; /* Alinear el texto al centro */
+    font-size: 1.125rem; /* Tamaño de texto del pie de página */
+}
